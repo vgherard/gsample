@@ -14,3 +14,5 @@ LinkingTo:
     Rcpp
 Imports: 
     Rcpp
+URL: https://github.com/vgherard/gsample
+BugReports: https://github.com/vgherard/gsample/issues
