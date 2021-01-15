@@ -2,10 +2,10 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 gsample_wo_repl <- function(size, phi) {
-    .Call('_gsample_gsample_wo_repl', PACKAGE = 'gsample', size, phi)
+    .Call(`_gsample_gsample_wo_repl`, size, phi)
 }
 
 gsample_w_repl <- function(size, phi) {
-    .Call('_gsample_gsample_w_repl', PACKAGE = 'gsample', size, phi)
+    .Call(`_gsample_gsample_w_repl`, size, phi)
 }
 

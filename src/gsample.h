@@ -6,7 +6,6 @@
 #include <queue>
 #include <random>
 
-
 struct IndexScorePair {
 	int index;
 	double score;

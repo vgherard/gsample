@@ -26,13 +26,13 @@ gsample <- function(size, weights, replace = FALSE, log_weights = FALSE, map = N
 {
 	checkargs(size, weights, log_weights, replace, map)
 
-	if (!logweights)
+	if (!log_weights)
 		weights <- log(weights)
 
 	if (replace) {
-		index <- gsample_w_repl(size, phi)
+		index <- gsample_w_repl(size, weights)
 	} else {
-		index <- gsample_wo_repl(size, phi)
+		index <- gsample_wo_repl(size, weights)
 	}
 
 	if (is.null(map)) {
