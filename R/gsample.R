@@ -1,7 +1,7 @@
-#' Sample a discrete random variable given its log-probabilities
+#' Efficient sampling from discrete probability distributions
 #'
-#' Sample from a discrete probability distribution with Pr(i) ∝ exp(phi[i])
-#' using the Gumbel-Max trick (c.f. \url{https://lips.cs.princeton.edu/the-gumbel-max-trick-for-discrete-distributions/}).
+#' Sample from a discrete probability distribution
+#' using the Gumbel-Max trick (c.f. \url{https://arxiv.org/pdf/1903.06059.pdf}).
 #
 #' @author Valerio Gherardi
 #' @md
@@ -20,7 +20,7 @@
 #' corresponding to such indexes.
 #' @return an integer vector if \code{map} is \code{NULL}, otherwise a vector
 #' of the same type as \code{map}.
-#
+#'
 #' @export
 gsample <- function(size,
 		    weights,
