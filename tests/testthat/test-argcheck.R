@@ -1,72 +1,52 @@
 context("argcheck")
 
 # A set of valid arguments
-size <- 1
-weights <- c(1, 1, 1)
-replace <- FALSE
-log_weights <- FALSE
-map <- NULL
+l <- list(n = 3, size = 1, replace = F, weights = c(1, 1, 1), log_weights = F)
 
 test_that("valid arguments do not throw any error", {
-	expect_error(argcheck(size, weights, replace, log_weights, map), NA)
+	expect_error(do.call(argcheck, l), NA)
+})
+
+test_that("invalid 'n' errors", {
+	invalid_n <- list("10", 0, -1, function() {})
+	lapply(invalid_n, function(n) {
+		l[["n"]] <- n
+		expect_error(do.call(argcheck, l))
+	})
 })
 
 test_that("invalid 'size' errors", {
-	expect_error(
-		argcheck(size = "10", weights, replace, log_weights, map)
-		)
-	expect_error(
-		argcheck(size = c(1, 2), weights, replace, log_weights, map)
-		)
-	expect_error(
-		argcheck(size = -1, weights, replace, log_weights, map)
-	)
-})
-
-test_that("invalid 'weights' errors", {
-	expect_error(
-		argcheck(size, weights = "a", replace, log_weights, map)
-	)
-	expect_error(
-		argcheck(size, weights = numeric(), replace, log_weights, map)
-	)
-	expect_error(
-		argcheck(size, weights = -1, replace, log_weights,  map)
-	)
-	expect_error(
-		argcheck(size, weights = -1, replace, log_weights = T, map),
-	NA)
+	invalid_size <- list("10", c(1, 2), -1, 4)
+	lapply(invalid_size, function(size) {
+	       	l[["size"]] <- size
+	       	expect_error(do.call(argcheck, l))
+	       })
 })
 
 test_that("invalid 'replace' errors", {
+	invalid_replace <- list("a", NA)
+	lapply(invalid_replace, function(replace) {
+		l[["replace"]] <- replace
+		expect_error(do.call(argcheck, l))
+	})
+})
+
+test_that("invalid 'weights' errors", {
+	invalid_weights <- list("a", numeric(), c(-1, -2, -3), c(1, 2))
+	lapply(invalid_weights, function(weights) {
+		l[["weight"]] <- weights
+		expect_error(do.call(argcheck, l))
+	})
+
 	expect_error(
-		argcheck(size, weights, replace = "a", log_weights, map)
-	)
-	expect_error(
-		argcheck(size, weights, replace = NA, log_weights, map)
-	)
-	expect_error(
-		argcheck(size, weights, replace = TRUE, log_weights = T, map),
+		argcheck(3, 1, F, weights = c(-1, -3, -2), log_weights = T),
 		NA)
 })
 
 test_that("invalid 'log_weights' errors", {
-	expect_error(
-		argcheck(size, weights, replace, log_weights = "a", map)
-	)
-	expect_error(
-		argcheck(size, weights, replace, log_weights = NA, map)
-	)
-	expect_error(
-		argcheck(size, weights, replace, log_weights = T, map),
-		NA) # A valid use case, since all(weights > 0)
-})
-
-test_that("invalid 'map' errors", {
-	expect_error(
-		argcheck(size, weights, replace, log_weights, map = c(1, 2))
-	) # length(map) does not match length(weights)
-	expect_error(
-		argcheck(size, weights, replace, log_weights = NA, map = print)
-	) # map is not a vector
+	invalid_log_weights <- list("a", NA)
+	lapply(invalid_log_weights, function(log_weights) {
+		l[["log_weights"]] <- log_weights
+		expect_error(do.call(argcheck, l))
+	})
 })

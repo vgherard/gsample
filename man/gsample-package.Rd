@@ -4,10 +4,9 @@
 \name{gsample-package}
 \alias{gsample}
 \alias{gsample-package}
-\title{gsample: What the Package Does (Title Case)}
+\title{gsample: Efficient Weighted Sampling Without Replacement}
 \description{
-More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Sample without replacement using the Gumbel-Max trick (c.f. \url{https://arxiv.org/pdf/1903.06059.pdf}).
 }
 \seealso{
 Useful links:

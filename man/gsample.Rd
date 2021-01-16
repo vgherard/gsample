@@ -2,35 +2,48 @@
 % Please edit documentation in R/gsample.R
 \name{gsample}
 \alias{gsample}
-\title{Efficient sampling from discrete probability distributions}
+\alias{gsample.int}
+\title{Efficient sampling without replacement}
 \usage{
-gsample(size, weights, replace = FALSE, log_weights = FALSE, map = NULL)
+gsample.int(n, size = n, replace = FALSE, weights = NULL, log_weights = FALSE)
+
+gsample(x, size, replace = FALSE, weights = NULL, log_weights = FALSE)
 }
 \arguments{
-\item{size}{length one integer. Size of sample.}
+\item{n}{length one integer. The total number of categories to choose from;
+See ‘Details’.}
 
-\item{weights}{a numeric vector, containing either (unnormalized)
-probabilities or (unnormalized) log-probabilities of categories
-(c.f. description of \code{log_weights} argument).}
+\item{size}{length one integer. Size of sample.}
 
 \item{replace}{TRUE or FALSE. Sample with replacement? Defaults to
 \code{FALSE}.}
 
-\item{log_weights}{TRUE or FALSE. Are the \code{weights} given as
-(unnormalized) log-probabilities? Defaults to \code{FALSE}.}
+\item{weights}{either \code{NULL}, or a numeric vector of length \code{n},
+containing the (unnormalized) probabilities, or the (unnormalized)
+log-probabilities for sampling categories
+(depending on the value of \code{log_weights} argument, see below).
+If \code{NULL} (default), sampling is performed assuming uniform
+probabilities.}
 
-\item{map}{either \code{NULL} or a vector of length \code{length(weights)}.
-If \code{NULL}, the returned value is an integer vector containing the
-indexes of the sampled classes, otherwise the elements of \code{map}
-corresponding to such indexes.}
+\item{log_weights}{TRUE or FALSE. Should the values given in \code{weights}
+be interpreted as (unnormalized) log-probabilities? Defaults to \code{FALSE}.}
 }
 \value{
 an integer vector if \code{map} is \code{NULL}, otherwise a vector
 of the same type as \code{map}.
 }
 \description{
-Sample from a discrete probability distribution
-using the Gumbel-Max trick (c.f. \url{https://arxiv.org/pdf/1903.06059.pdf}).
+Sample without replacement using the Gumbel-Max trick
+(c.f. \url{https://arxiv.org/pdf/1903.06059.pdf}).
+}
+\details{
+
+}
+\examples{
+set.seed(840)
+size <- 5
+weights <- rnorm(length(letters), sd = 10)
+gsample(size = 5, weights, map = letters)
 }
 \author{
 Valerio Gherardi

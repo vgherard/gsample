@@ -1,10 +1,10 @@
 Package: gsample
 Type: Package
-Title: Efficient Sampling from Discrete Probability Distributions
+Title: Efficient Weighted Sampling Without Replacement
 Version: 0.1.0
 Author: Valerio Gherardi
 Maintainer: Valerio Gherardi <vgherard@sissa.it>
-Description: Sample from a discrete probability distribution using the Gumbel-Max trick (c.f. \url{https://arxiv.org/pdf/1903.06059.pdf}).
+Description: Sample without replacement using the Gumbel-Max trick (c.f. \url{https://arxiv.org/pdf/1903.06059.pdf}).
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
