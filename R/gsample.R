@@ -29,7 +29,7 @@ gsample <- function(size,
 		    map = NULL
 		    )
 {
-	checkargs(size, weights, log_weights, replace, map)
+	argcheck(size, weights, replace, log_weights, map)
 
 	if (replace) {
 		index <- gsample_wr(size, weights, log_weights)
@@ -42,19 +42,4 @@ gsample <- function(size,
 	} else {
 		return(map[index])
 	}
-}
-
-checkargs <- function(size, weights, log_weights, replace, map) {
-	if (!is.numeric(size) || length(size) != 1)
-		stop("'n' must be a length one integer.")
-	if (!is.numeric(weights) || length(weights) == 0)
-		stop("'phi' must be a length > 1 numeric")
-	if (!is.logical(log_weights) || length(log_weights) != 1)
-		stop("'logweights' must be a length one logical")
-	if (!is.logical(replace) || length(replace) != 1)
-		stop("'replace' must be a length one logical")
-	if (!replace && length(weights) < size)
-		stop("cannot take a sample larger than the population when 'replace = FALSE'")
-	if (!is.null(map) & length(map) != length(weights))
-		stop("'map' must be either NULL or a vector of length 'length(weight)'")
 }
