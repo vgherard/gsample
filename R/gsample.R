@@ -22,17 +22,19 @@
 #' of the same type as \code{map}.
 #
 #' @export
-gsample <- function(size, weights, replace = FALSE, log_weights = FALSE, map = NULL)
+gsample <- function(size,
+		    weights,
+		    replace = FALSE,
+		    log_weights = FALSE,
+		    map = NULL
+		    )
 {
 	checkargs(size, weights, log_weights, replace, map)
 
-	if (!log_weights)
-		weights <- log(weights)
-
 	if (replace) {
-		index <- gsample_w_repl(size, weights)
+		index <- gsample_wr(size, weights, log_weights)
 	} else {
-		index <- gsample_wo_repl(size, weights)
+		index <- gsample_wor(size, weights, log_weights)
 	}
 
 	if (is.null(map)) {

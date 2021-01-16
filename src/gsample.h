@@ -3,7 +3,8 @@
 
 // [[Rcpp::plugins(cpp11)]]
 #include <Rcpp.h>
-#include <queue>
+#include <vector>
+#include <algorithm>
 #include <random>
 
 struct IndexScorePair {

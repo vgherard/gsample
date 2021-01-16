@@ -5,34 +5,36 @@
 
 using namespace Rcpp;
 
-// gsample_wo_repl
-IntegerVector gsample_wo_repl(int size, NumericVector phi);
-RcppExport SEXP _gsample_gsample_wo_repl(SEXP sizeSEXP, SEXP phiSEXP) {
+// gsample_wor
+IntegerVector gsample_wor(size_t size, NumericVector weights, bool log_weights);
+RcppExport SEXP _gsample_gsample_wor(SEXP sizeSEXP, SEXP weightsSEXP, SEXP log_weightsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type phi(phiSEXP);
-    rcpp_result_gen = Rcpp::wrap(gsample_wo_repl(size, phi));
+    Rcpp::traits::input_parameter< size_t >::type size(sizeSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log_weights(log_weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gsample_wor(size, weights, log_weights));
     return rcpp_result_gen;
 END_RCPP
 }
-// gsample_w_repl
-IntegerVector gsample_w_repl(int size, NumericVector phi);
-RcppExport SEXP _gsample_gsample_w_repl(SEXP sizeSEXP, SEXP phiSEXP) {
+// gsample_wr
+IntegerVector gsample_wr(size_t size, NumericVector weights, bool log_weights);
+RcppExport SEXP _gsample_gsample_wr(SEXP sizeSEXP, SEXP weightsSEXP, SEXP log_weightsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type phi(phiSEXP);
-    rcpp_result_gen = Rcpp::wrap(gsample_w_repl(size, phi));
+    Rcpp::traits::input_parameter< size_t >::type size(sizeSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type log_weights(log_weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(gsample_wr(size, weights, log_weights));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_gsample_gsample_wo_repl", (DL_FUNC) &_gsample_gsample_wo_repl, 2},
-    {"_gsample_gsample_w_repl", (DL_FUNC) &_gsample_gsample_w_repl, 2},
+    {"_gsample_gsample_wor", (DL_FUNC) &_gsample_gsample_wor, 3},
+    {"_gsample_gsample_wr", (DL_FUNC) &_gsample_gsample_wr, 3},
     {NULL, NULL, 0}
 };
 
