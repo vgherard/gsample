@@ -1,2 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^appveyor\.yml$
+^\.circleci$
+^\.circleci/config\.yml$
+^\.github$
