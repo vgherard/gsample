@@ -1,0 +1,66 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# gsample
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+`gsample` allows efficient weighted sampling without replacement using the
+Gumbel-Max trick.
+
+## Installation
+
+You can install `gsample` from [GitHub](https://github.com/vgherard/gsample) 
+with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("vgherard/gsample")
+```
+## Example
+
+The `gsample` API is similar to `base::sample()`:
+
+```{r}
+library(gsample)
+n <- 1e3
+size <- 1e2
+weights <- exp(rnorm(n, sd = 3))
+gsample.int(n, size, weights = weights)
+```
+
+```{r}
+x <- letters
+size <- 10
+weights <- exp(rnorm(length(letters), sd = 3))
+gsample(x, size, weights = weights)
+```
+
+Here is a simple benchmark comparing to `base::sample()`:
+
+```{r, message=FALSE, warning=FALSE}
+library(bench)
+library(dplyr)
+n <- 1e6
+size <- 1e5
+weights <- exp(rnorm(n, sd = 3))
+
+bench::mark(
+gsample.int(n, size, weights = weights),
+sample.int(n, size, prob = weights),
+check = FALSE
+) %>% select(min, median, mem_alloc, n_itr)
+```
