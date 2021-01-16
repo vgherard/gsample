@@ -4,3 +4,4 @@
 ^\.circleci$
 ^\.circleci/config\.yml$
 ^\.github$
+^\ignore\

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsample.R
 \name{gsample}
 \alias{gsample}
-\title{Sample a discrete random variable given its log-probabilities}
+\title{Efficient sampling from discrete probability distributions}
 \usage{
 gsample(size, weights, replace = FALSE, log_weights = FALSE, map = NULL)
 }
@@ -29,8 +29,8 @@ an integer vector if \code{map} is \code{NULL}, otherwise a vector
 of the same type as \code{map}.
 }
 \description{
-Sample from a discrete probability distribution with Pr(i) ∝ exp(phi\link{i})
-using the Gumbel-Max trick (c.f. \url{https://lips.cs.princeton.edu/the-gumbel-max-trick-for-discrete-distributions/}).
+Sample from a discrete probability distribution
+using the Gumbel-Max trick (c.f. \url{https://arxiv.org/pdf/1903.06059.pdf}).
 }
 \author{
 Valerio Gherardi
