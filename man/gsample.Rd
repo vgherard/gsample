@@ -3,11 +3,11 @@
 \name{gsample}
 \alias{gsample}
 \alias{gsample.int}
-\title{Efficient sampling without replacement}
+\title{Efficient weighted sampling without replacement}
 \usage{
-gsample.int(n, size = n, replace = FALSE, weights = NULL, log_weights = FALSE)
+gsample.int(n, size = n, replace = FALSE, prob = NULL)
 
-gsample(x, size, replace = FALSE, weights = NULL, log_weights = FALSE)
+gsample(x, size, replace = FALSE, prob)
 }
 \arguments{
 \item{n}{length one integer. The total number of categories to choose from;
@@ -18,32 +18,25 @@ See ‘Details’.}
 \item{replace}{TRUE or FALSE. Sample with replacement? Defaults to
 \code{FALSE}.}
 
-\item{weights}{either \code{NULL}, or a numeric vector of length \code{n},
-containing the (unnormalized) probabilities, or the (unnormalized)
-log-probabilities for sampling categories
-(depending on the value of \code{log_weights} argument, see below).
+\item{prob}{either \code{NULL}, or a numeric vector of length \code{n},
+containing probability weights for sampling the various classes.
 If \code{NULL} (default), sampling is performed assuming uniform
 probabilities.}
 
-\item{log_weights}{TRUE or FALSE. Should the values given in \code{weights}
-be interpreted as (unnormalized) log-probabilities? Defaults to \code{FALSE}.}
+\item{x}{a vector of one or more elements from which to choose.}
 }
 \value{
-an integer vector if \code{map} is \code{NULL}, otherwise a vector
-of the same type as \code{map}.
+an integer vector of class indexes for \code{gsample.int}, a vector
+of the same type of \code{x} for \code{gsample}.
 }
 \description{
-Sample without replacement using the Gumbel-Max trick
+Weighted sampling without replacement using the Gumbel-Max trick
 (c.f. \url{https://arxiv.org/pdf/1903.06059.pdf}).
-}
-\details{
-
 }
 \examples{
 set.seed(840)
-size <- 5
-weights <- rnorm(length(letters), sd = 10)
-gsample(size = 5, weights, map = letters)
+gsample(letters, 5, prob = runif(length(letters)))
+gsample.int(10, 3, prob = 10:1)
 }
 \author{
 Valerio Gherardi
