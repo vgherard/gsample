@@ -1,9 +1,8 @@
 # Argument checking for gsample()
 argcheck <- function(n,
 		     size,
-		     replace = FALSE,
-		     weights = NULL,
-		     log_weights = FALSE
+		     replace,
+		     prob
 		     )
 {
 	if (!is.numeric(n) || length(n) != 1)
@@ -25,16 +24,8 @@ argcheck <- function(n,
 		stop("cannot take a sample larger than the population",
 		     " when 'replace = FALSE'")
 
-	if (!is.null(weights) &&
-	    (!is.numeric(weights) || length(weights) != n) )
-		stop("'weights' must be a numeric vector length 'n'.")
-
-	if (!is.logical(log_weights) || length(log_weights) != 1)
-		stop("'log_weights' must be a length one logical")
-	if (is.na(log_weights))
-		stop("'log_weights' must be either 'TRUE' or 'FALSE'.")
-
-	if (!log_weights && any(weights < 0))
-		stop("'weights' must be positive if 'log_weights' is 'FALSE'.")
+	if (!is.null(prob) &&
+	    (!is.numeric(prob) || length(prob) != n) )
+		stop("'prob' must be a numeric vector length 'n'.")
 
 }
