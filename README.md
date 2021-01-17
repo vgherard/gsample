@@ -30,12 +30,12 @@ n <- 1e3
 size <- 1e2
 prob <- exp(rnorm(n, sd = 3))
 gsample.int(n, size, prob = prob)
-#>   [1] 775 983 452  60 423 738  45 798 707 174 839 192 178 470 898 678 348 777
-#>  [19]  37 362 267 569 720 367 614 460  26 598 954 405 892 841 142 970 976 424
-#>  [37] 309 339 813 533 528 953 155 780  31 113 929 343 805 429 499 676 104  93
-#>  [55] 582 493 211 984 889 463 504 808 264 670 552  57 855 333 712 683 941 746
-#>  [73] 644 467 318 287  98 957 291 380 904 868 727 474 483 496  83 835 769  48
-#>  [91] 556 469 512 480 886 748 665 409 326 755
+#>   [1] 236   4 847 991 188 801 410 181 593 470 293 411 509 253 885 423  59 120
+#>  [19] 880 301 894 883 784 768 546 955 778 529 899 307 629 176 131 468 206 865
+#>  [37] 609 871 605 997  56 460 404 590 391 772 575 412 421 140 896 510  31 222
+#>  [55] 437 488 755 258 480 875 160 982  54 399 713 731 432 543 734 505 388 380
+#>  [73] 804 430  93 915 492 187 334 630 877 339 567 262 939 839 456 306 621 481
+#>  [91] 197 716 382 597 859 727 745 365 162 159
 ```
 
 ``` r
@@ -43,7 +43,7 @@ x <- letters
 size <- 10
 prob <- exp(rnorm(length(letters), sd = 3))
 gsample(x, size, prob = prob)
-#>  [1] "g" "p" "u" "i" "b" "v" "c" "h" "y" "s"
+#>  [1] "g" "k" "w" "n" "y" "m" "u" "h" "t" "b"
 ```
 
 Here are some simple benchmark comparisons with `base::sample()`:
@@ -67,10 +67,10 @@ bm <- lapply(10 ^ (1:5), function(size) {
     }) 
 
 bind_rows(bm) %>%
-    ggplot(aes(x = size, y = median, colour = expression)) +
+    ggplot(aes(x = size, y = 1e3 * median, colour = expression)) +
         geom_line() +
         scale_x_continuous(trans = "log10") +
-        scale_y_continuous("median (s)")
+        scale_y_continuous("median (ms)", trans = "log10")
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
