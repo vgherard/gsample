@@ -32,35 +32,47 @@ devtools::install_github("vgherard/gsample")
 ```
 ## Example
 
-The `gsample` API is similar to `base::sample()`:
+The `gsample` API is identical to the one of `base::sample()`:
 
 ```{r}
 library(gsample)
 n <- 1e3
 size <- 1e2
-weights <- exp(rnorm(n, sd = 3))
-gsample.int(n, size, weights = weights)
+prob <- exp(rnorm(n, sd = 3))
+gsample.int(n, size, prob = prob)
 ```
 
 ```{r}
 x <- letters
 size <- 10
-weights <- exp(rnorm(length(letters), sd = 3))
-gsample(x, size, weights = weights)
+prob <- exp(rnorm(length(letters), sd = 3))
+gsample(x, size, prob = prob)
 ```
 
-Here is a simple benchmark comparing to `base::sample()`:
+Here are some simple benchmark comparisons with `base::sample()`:
 
 ```{r, message=FALSE, warning=FALSE}
-library(bench)
 library(dplyr)
+library(ggplot2)
+set.seed(840)
 n <- 1e6
-size <- 1e5
-weights <- exp(rnorm(n, sd = 3))
+prob <- rexp(n)
 
-bench::mark(
-gsample.int(n, size, weights = weights),
-sample.int(n, size, prob = weights),
-check = FALSE
-) %>% select(min, median, mem_alloc, n_itr)
+bm <- lapply(10 ^ (1:5), function(size) {
+	bench::mark(
+		gsample.int(n, size, prob = prob),
+		sample.int(n, size, prob = prob),
+		check = FALSE
+		) %>%
+		select(expression, median) %>%
+		mutate(expression = as.character(expression)) %>%
+       		mutate(size = size)
+	}) 
+
+bind_rows(bm) %>%
+	ggplot(aes(x = size, y = median, colour = expression)) +
+		geom_line() +
+		scale_x_continuous(trans = "log10") +
+		scale_y_continuous("median (s)")
+
 ```
