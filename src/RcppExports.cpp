@@ -5,22 +5,36 @@
 
 using namespace Rcpp;
 
-// gsample_wor
-IntegerVector gsample_wor(size_t n, size_t size, NumericVector prob);
-RcppExport SEXP _gsample_gsample_wor(SEXP nSEXP, SEXP sizeSEXP, SEXP probSEXP) {
+// gsample_introselect
+IntegerVector gsample_introselect(size_t n, size_t size, NumericVector prob);
+RcppExport SEXP _gsample_gsample_introselect(SEXP nSEXP, SEXP sizeSEXP, SEXP probSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< size_t >::type n(nSEXP);
     Rcpp::traits::input_parameter< size_t >::type size(sizeSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type prob(probSEXP);
-    rcpp_result_gen = Rcpp::wrap(gsample_wor(n, size, prob));
+    rcpp_result_gen = Rcpp::wrap(gsample_introselect(n, size, prob));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gsample_partial_heap
+IntegerVector gsample_partial_heap(size_t n, size_t size, NumericVector prob);
+RcppExport SEXP _gsample_gsample_partial_heap(SEXP nSEXP, SEXP sizeSEXP, SEXP probSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< size_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< size_t >::type size(sizeSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type prob(probSEXP);
+    rcpp_result_gen = Rcpp::wrap(gsample_partial_heap(n, size, prob));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_gsample_gsample_wor", (DL_FUNC) &_gsample_gsample_wor, 3},
+    {"_gsample_gsample_introselect", (DL_FUNC) &_gsample_gsample_introselect, 3},
+    {"_gsample_gsample_partial_heap", (DL_FUNC) &_gsample_gsample_partial_heap, 3},
     {NULL, NULL, 0}
 };
 
