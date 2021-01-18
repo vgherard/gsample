@@ -6,7 +6,7 @@ class Comparison {
 public:
 	Comparison(const std::vector<double> & g) : g_(g) {}
 	bool operator() (const size_t &l, const size_t & r)
-		{return g_[l] < g_[r];}
+	{return g_[l] > g_[r];}
 };
 
 // [[Rcpp::export]]
@@ -25,17 +25,21 @@ IntegerVector gsample_wor(size_t n,
 	 	g[k] = prob[k] / R::rexp(1.0);
 	}
 	Comparison cmp(g);
-	std::make_heap(H.begin(), H.end(), cmp);
+	// std::make_heap(H.begin(), H.end(), cmp);
+	std::nth_element(H.begin(), H.begin() + size, H.end(), cmp);
 
 	// Fill result with 'size' indexes having largest g - equivalent to
 	// sampling w/o replacement (Gumbel-Max trick).
 	// Time = O(size * log(n)), Space = O(size)
 	IntegerVector res(size);
 	auto res_end = res.end();
+	size_t k = 0;
 	for (auto res_it = res.begin(); res_it != res_end; ++res_it) {
-		*res_it = H.front() + 1; // Indexes in H(n) are zero-based!
-		std::pop_heap(H.begin(), H.end(), cmp);
-		H.pop_back();
+		*res_it = H[k] + 1;
+		k++;
+		// *res_it = H.front() + 1; // Indexes in H(n) are zero-based!
+		// std::pop_heap(H.begin(), H.end(), cmp);
+		// H.pop_back();
 	}
 
 	return res;
