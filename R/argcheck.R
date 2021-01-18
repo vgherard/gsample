@@ -2,7 +2,8 @@
 argcheck <- function(n,
 		     size,
 		     replace,
-		     prob
+		     prob,
+		     algorithm
 		     )
 {
 	if (!is.numeric(n) || length(n) != 1)
@@ -28,4 +29,10 @@ argcheck <- function(n,
 	    (!is.numeric(prob) || length(prob) != n) )
 		stop("'prob' must be a numeric vector length 'n'.")
 
+	if (!is.null(algorithm) &&
+	    !identical(algorithm, "introselect") &&
+	    !identical(algorithm, "partial_heap")
+	    ) stop("'algorithm' must be either 'NULL',",
+	           "or \"introselect\" or \"partial_heap\""
+	           )
 }

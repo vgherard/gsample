@@ -5,7 +5,7 @@
 \alias{gsample.int}
 \title{Efficient weighted sampling without replacement}
 \usage{
-gsample.int(n, size = n, replace = FALSE, prob = NULL)
+gsample.int(n, size = n, replace = FALSE, prob = NULL, algorithm = NULL)
 
 gsample(x, size, replace = FALSE, prob)
 }
