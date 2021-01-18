@@ -6,5 +6,6 @@
 #include <Rmath.h>
 #include <vector>
 #include <algorithm>
+#include <queue>
 
 #endif // GSAMPLE_H
