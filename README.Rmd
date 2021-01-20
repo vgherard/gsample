@@ -18,8 +18,9 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-`gsample` allows efficient weighted sampling without replacement using the
-Gumbel-Max trick.
+`gsample` offers a drop-in replacement for the R `base::sample()` functions for
+random sampling, with considerably better performance for the case of weighted 
+sampling without replacement (both from the speed and memory point of view).
 
 ## Installation
 

@@ -7,8 +7,10 @@
 
 <!-- badges: end -->
 
-`gsample` allows efficient weighted sampling without replacement using
-the Gumbel-Max trick.
+`gsample` offers a drop-in replacement for the R `base::sample()`
+functions for random sampling, with considerably better performance for
+the case of weighted sampling without replacement (both from the speed
+and memory point of view).
 
 ## Installation
 
@@ -30,12 +32,12 @@ n <- 1e3
 size <- 1e2
 prob <- exp(rnorm(n, sd = 3))
 gsample.int(n, size, prob = prob)
-#>   [1] 236   4 847 991 188 801 410 181 593 470 293 411 509 253 885 423  59 120
-#>  [19] 880 301 894 883 784 768 546 955 778 529 899 307 629 176 131 468 206 865
-#>  [37] 609 871 605 997  56 460 404 590 391 772 575 412 421 140 896 510  31 222
-#>  [55] 437 488 755 258 480 875 160 982  54 399 713 731 432 543 734 505 388 380
-#>  [73] 804 430  93 915 492 187 334 630 877 339 567 262 939 839 456 306 621 481
-#>  [91] 197 716 382 597 859 727 745 365 162 159
+#>   [1] 898 905 225 504 298 893 166 430 990 464 683 993  13 404 229 862 379 494
+#>  [19] 135 226 232  22 370 236 985 562 186 395 487 873 527 561 810 420 480 572
+#>  [37] 891 120 919  40 556  42  43 799 161 479 878  48 258 400 577 896 398 511
+#>  [55] 270 593 314 776 840 928 771 478 448 446 441   6 998 286 293  10 757 877
+#>  [73] 941 545 939 434 662 115 583 602  63 148 542 674 986 126 317 975  33 794
+#>  [91] 965 741 752 994  56 940 530  52 785 745
 ```
 
 ``` r
@@ -43,7 +45,7 @@ x <- letters
 size <- 10
 prob <- exp(rnorm(length(letters), sd = 3))
 gsample(x, size, prob = prob)
-#>  [1] "g" "k" "w" "n" "y" "m" "u" "h" "t" "b"
+#>  [1] "r" "z" "c" "y" "e" "f" "o" "u" "i" "l"
 ```
 
 Here are some simple benchmark comparisons with `base::sample()`:
